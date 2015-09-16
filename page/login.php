@@ -34,11 +34,7 @@
 	}
 	
 ?>
-<html>
-<head>
-	<title>Login page</title>
-</head>
-<body>
+<?php require_once("../header.php"); ?>
 	
 	<h2>Log in</h2>
 		
@@ -50,5 +46,4 @@
 	
 	<h2>Create user</h2>
 	
-</body>
-</html>
+<?php require_once("../footer.php"); ?>
