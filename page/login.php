@@ -6,30 +6,54 @@
 	$email_error = "";
 	$password_error = "";
 	
+	$name_error = "";
+	
 	// kontrollime et keegi vajutas input nuppu
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		//echo "keegi vajutas nuppu";
 		
-		//kontrollin et e-post ei ole tühi
-		if ( empty($_POST["email"]) ) {
-			$email_error = "See väli on kohustuslik";
-		}
+		// vajutas login nuppu
+		if(isset($_POST["login"])){ 
+			
+			echo "vajutas login nuppu!";
 		
-		//kontrollin, et parool ei ole tühi
-		if ( empty($_POST["password"]) ) {
-			$password_error = "See väli on kohustuslik";
-		} else {
+			//kontrollin et e-post ei ole tühi
+			if ( empty($_POST["email"]) ) {
+				$email_error = "See väli on kohustuslik";
+			}
 			
-			// kui oleme siia jõudnud, siis parool ei ole tühi
-			// kontrollin, et oleks vähemalt 8 sümbolit pikk
-			if(strlen($_POST["password"]) < 8) { 
-			
-				$password_error = "Peab olema vähemalt 8 tähemärki pikk!";
+			//kontrollin, et parool ei ole tühi
+			if ( empty($_POST["password"]) ) {
+				$password_error = "See väli on kohustuslik";
+			} else {
 				
+				// kui oleme siia jõudnud, siis parool ei ole tühi
+				// kontrollin, et oleks vähemalt 8 sümbolit pikk
+				if(strlen($_POST["password"]) < 8) { 
+				
+					$password_error = "Peab olema vähemalt 8 tähemärki pikk!";
+					
+				}
+				
+			}
+		
+		
+		
+		// keegi vajutas create nuppu
+		}elseif(isset($_POST["create"])){
+			
+			echo "vajutas create nuppu!";
+			
+			//valideerimine create user vormile
+			//kontrollin et e-post ei ole tühi
+			if ( empty($_POST["name"]) ) {
+				$name_error = "See väli on kohustuslik";
 			}
 			
 		}
+		
+		
 		
 	}
 	
@@ -45,9 +69,14 @@
 		<form action="login.php" method="post" >
 			<input name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?><br><br>
 			<input name="password" type="password" placeholder="Parool"> <?php echo $password_error; ?> <br><br>
-			<input type="submit" value="Log in">
+			<input name="login" type="submit" value="Log in">
 		</form>
 	
 	<h2>Create user</h2>
+		
+		<form action="login.php" method="post" >
+			<input name="name" type="text" placeholder="Eesnimi Perenimi">* <?php echo $name_error; ?><br><br>
+			<input name="create" type="submit" value="Create">
+		</form>
 	
 <?php require_once("../footer.php"); ?>
